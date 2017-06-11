@@ -1,5 +1,37 @@
-<form action="/MuseBox/" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
-</form>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'  type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/static/MuseBox/MuseBox.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>MuseBox</title>
+  </head>
+  <body>
+    <video autoplay loop poster="/static/MuseBox/bg.png" id="bgvid">
+        <source src="/static/MuseBox/bg.webm" type="video/webm">
+        <source src="/static/MuseBox/bg.mp4" video/mp4">
+    </video>
+    <h1 id="title">
+        MuseBox - Music Search Engine
+    </h1>
+    <h3 id="info">
+        This app is the next big thing for
+        whoever like music. Only enter 3 songs
+        you like and we will tell you the
+        best next song you need to listen.
+        Simple as that !
+    </h3>
+    <div class="form-group" id="divForm">
+        <form action="/MuseBox/" id="formSongs" method="post">
+             {% csrf_token %}
+             {{ form.as_p }}
+             <input type="submit" class="btn btn-info" id="submit" value="Let's go !" />
+             <button type="reset" class="btn btn-info" id="reset" value="Reset">Reset</button>
+        </form>
+    </div>
+  </body>
+</html>
