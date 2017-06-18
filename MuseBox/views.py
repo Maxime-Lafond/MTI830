@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from .models import Song, SongManager
 from .forms import UserSongs
 
@@ -11,5 +10,6 @@ def index(request):
         result = SongManager.findBestMatch(song1, song2, song3)
         return render(request, 'result.html', {'result': result})
     else:
+        # SongManager.initDB()
         form = UserSongs()
         return render(request, 'index.html', {'form': form})
