@@ -10,6 +10,6 @@ def index(request):
         result = SongManager.findBestMatch(song1, song2, song3)
         return render(request, 'result.html', {'result': result})
     else:
-        # SongManager.initDB()
+        SongManager.initDB() # Mettre en commentaire après le premier init
         form = UserSongs()
         return render(request, 'index.html', {'form': form})
