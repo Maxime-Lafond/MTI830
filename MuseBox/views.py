@@ -1,13 +1,10 @@
 from django.shortcuts import render
-from .models import Song, SongManager
+from .models import SongManager
 from .forms import UserSongs
 
 def index(request):
     if request.method == 'POST':
-        song1 = Song.create(request.POST['songTitle1'])
-        song2 = Song.create(request.POST['songTitle2'])
-        song3 = Song.create(request.POST['songTitle3'])
-        result = SongManager.findBestMatch(song1, song2, song3)
+        result = SongManager.findBestMatch(request.POST.get('songTitle1'), request.POST.get('songTitle2'), request.POST.get('songTitle3'))
         return render(request, 'result.html', {'result': result})
     else:
         #SongManager.initDB()

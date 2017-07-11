@@ -31,18 +31,24 @@ class Song(models.Model):
     categorySoulReggaeFunk = models.IntegerField(null=True)
     categoryDance = models.IntegerField(null=True)
 
-    @classmethod
-    def create(cls, title):
-        return cls(title=title)
-
 
 class SongManager(models.Manager):
+
     @staticmethod
     def findBestMatch(song1,song2,song3):
+        # first, find these 3 songs in the DB
+        userSongs = SongManager.retrieveSongsDB([song1,song2,song3])
         #
-        # Do something here
+        # DATA Mining here
         #
-        return Song.create("Lose yourself")
+
+    @staticmethod
+    def retrieveSongsDB(userSongsTitle):
+        result = []
+        for value in userSongsTitle:
+            song = list(Song.objects.filter(title__icontains=value))
+            result.append(song[0])
+        return result
 
     @staticmethod
     def initDB():
