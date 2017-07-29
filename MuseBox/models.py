@@ -110,11 +110,11 @@ class SongManager(models.Manager):
 
 
     @staticmethod
-    def filteringLists(lists):
+    def filteringListsByDistance(lists):
         for idx, my_list in enumerate(lists):
             count = 0
             for song, dist in my_list:
-                # Take frist 50 elements
+                # Take first 50 elements
                 if count < 50 and dist != 0:
                     lists[idx] = lists[idx][:50]
                     break
@@ -125,13 +125,26 @@ class SongManager(models.Manager):
                 count += 1
 
     @staticmethod
+    def createFinalList(lists):
+        result = []
+
+        for my_list in lists:
+            temp_list = []
+            for song, dist in my_list:
+                temp_list.append(song)
+            result.append(temp_list)
+
+        return result
+
+    @staticmethod
     def findBestMatch(user_songs):
         songs_set = list(Song.objects.all())
 
         # Euclidian algo on gender attributes. list for each user song of type dictionary (song:distance), ordered lower to higher.
-        results = SongManager.euclideanCalculationOnGender(user_songs,songs_set)
+        temp = SongManager.euclideanCalculationOnGender(user_songs,songs_set)
 
         # Take 50 first or all with distance 0.00
-        SongManager.filteringLists(results)
+        SongManager.filteringListsByDistance(temp)
 
-        return results
+
+        return SongManager.createFinalList(temp)
