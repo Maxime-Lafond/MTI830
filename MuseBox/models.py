@@ -1,4 +1,7 @@
 from django.db import models
+from collections import Counter
+import numpy
+import operator
 import csv
 
 class Song(models.Model):
@@ -32,20 +35,15 @@ class Song(models.Model):
 
     @classmethod
     def create(cls, title):
-        return cls(title=title)
+        return Song.objects.get(title=title)
 
 
 class SongManager(models.Manager):
-    @staticmethod
-    def findBestMatch(song1,song2,song3):
-        #
-        # Do something here
-        #
-        return Song.create("Lose yourself")
 
     @staticmethod
     def initDB():
         with open('/Users/max/PycharmProjects/mti830/MuseBox/static/MuseBox/SongDB_FINAL.csv') as f:
+            Song.objects.all().delete()
             reader = csv.reader(f)
             i = 0
             for row in reader:
@@ -82,3 +80,56 @@ class SongManager(models.Manager):
                     # creates a tuple of the new object or
                     # current object and a boolean of if it was created
                 i = i + 1
+
+
+    @staticmethod
+    def euclideanCalculationOnGender(user_songs,songs_set):
+        euclidean_results = []
+
+        # Variable initiation
+        for idx in enumerate(user_songs):
+            euclidean_results.append({})
+
+        # Calculation algorithm
+        for song in songs_set:
+            for idx, user_song in enumerate(user_songs):
+                if song != user_song:
+                    gender_attributes_song_dataset = numpy.array((song.categoryRock,song.categoryFolkCeltic,song.categoryElectronicTrance,song.categoryMetal,song.categoryPunkGrungeSka,
+                                                                  song.categoryPopChart,song.categoryJazzBlues,song.categoryCountry,song.categorySoulReggaeFunk,song.categoryDance))
+                    gender_attributes_song_user = numpy.array((user_song.categoryRock,user_song.categoryFolkCeltic,user_song.categoryElectronicTrance,user_song.categoryMetal,
+                                                               user_song.categoryPunkGrungeSka,user_song.categoryPopChart,user_song.categoryJazzBlues,user_song.categoryCountry,
+                                                               user_song.categorySoulReggaeFunk,user_song.categoryDance))
+                    dist = numpy.linalg.norm(gender_attributes_song_dataset - gender_attributes_song_user)
+                    euclidean_results[idx][song] = dist
+
+        # Sort each list by distance ( < is the most valuable)
+        for idx, my_list in enumerate(euclidean_results):
+            euclidean_results[idx] = sorted(my_list.items(), key=operator.itemgetter(1))
+
+        return euclidean_results
+
+
+    @staticmethod
+    def filteringLists(lists):
+        for idx, my_list in enumerate(lists):
+            count = 0
+            for song, dist in my_list:
+                if count < 50 and dist != 0:
+                    lists[idx] = lists[idx][:50]
+                    break
+                if count > 50 and dist != 0:
+                    lists[idx] = lists[idx][:count]
+                    break
+                count += 1
+
+    @staticmethod
+    def findBestMatch(user_songs):
+        songs_set = list(Song.objects.all())
+
+        # Euclidian algo on gender attributes. list for each user song of type dictionary (song:distance), ordered lower to higher.
+        results = SongManager.euclideanCalculationOnGender(user_songs,songs_set)
+
+        # Take 50 first or all with distance 0.00
+        SongManager.filteringLists(results)
+
+        return results

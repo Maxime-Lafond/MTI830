@@ -7,9 +7,9 @@ def index(request):
         song1 = Song.create(request.POST['songTitle1'])
         song2 = Song.create(request.POST['songTitle2'])
         song3 = Song.create(request.POST['songTitle3'])
-        result = SongManager.findBestMatch(song1, song2, song3)
+        result = SongManager.findBestMatch([song1, song2, song3])
         return render(request, 'result.html', {'result': result})
     else:
-        SongManager.initDB() # Mettre en commentaire après le premier init
+        #SongManager.initDB() # Mettre en commentaire après le premier init
         form = UserSongs()
         return render(request, 'index.html', {'form': form})
