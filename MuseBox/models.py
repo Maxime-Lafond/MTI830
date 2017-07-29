@@ -87,7 +87,7 @@ class SongManager(models.Manager):
         euclidean_results = []
 
         # Variable initiation
-        for idx in enumerate(user_songs):
+        for idx in user_songs:
             euclidean_results.append({})
 
         # Calculation algorithm
