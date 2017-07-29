@@ -114,9 +114,11 @@ class SongManager(models.Manager):
         for idx, my_list in enumerate(lists):
             count = 0
             for song, dist in my_list:
+                # Take frist 50 elements
                 if count < 50 and dist != 0:
                     lists[idx] = lists[idx][:50]
                     break
+                # Take all 0 distance, in case it is greater of 50
                 if count > 50 and dist != 0:
                     lists[idx] = lists[idx][:count]
                     break
