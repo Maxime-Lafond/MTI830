@@ -131,8 +131,8 @@ class SongManager(models.Manager):
         for my_list in lists:
             temp_list = []
             for song, dist in my_list:
-                temp_list.append(song)
-            result.append(temp_list)
+                temp_list.append(song.title + " - " + song.artistName)
+            result.append(temp_list[:3])
 
         return result
 

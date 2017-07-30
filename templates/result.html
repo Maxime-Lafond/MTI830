@@ -20,6 +20,18 @@
     </h1>
     <h3 id="info">
         Congrats ! Here is the result :
+
+    </h3>
+    <h3 id="result">
+        {% for row in result %}
+            Song {{ forloop.counter }} result :
+            <ul>
+            {% for cell in row %}
+               <li> {{ cell }} </li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+        </p>
     </h3>
   </body>
 </html>

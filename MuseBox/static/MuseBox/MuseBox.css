@@ -13,19 +13,25 @@ video#bgvid {
 
 #title {
     position:fixed;
-    top: 45%;
-    left: 70%;
-    width:30em;
-    height:18em;
-    margin-top: -9em;
-    margin-left: -15em;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -10%);
     font-family: 'Lobster';
     color: white;
 }
 
 #info {
     position:fixed;
-    top: 43%;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+	font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+#result {
+    position:fixed;
+    top: 50%;
     left: 50%;
     width:30em;
     height:18em;
@@ -38,22 +44,18 @@ video#bgvid {
 #divForm {
     position:fixed;
     top: 53%;
-    left: 46%;
+    left: 50%;
     width:35em;
     height:19em;
-    margin-top: -9em;
-    margin-left: -15em;
+    transform: translate(-50%, -53%);
     background-color:rgba(0,0,0,0.5);
 }
 
 #formSongs {
     position:fixed;
-    top: 63%;
-    left: 52%;
-    width:30em;
-    height:15em;
-    margin-top: -9em;
-    margin-left: -15em;
+    top: 55%;
+    left: 35%;
+    transform: translate(-35%, -55%);
     font-family: 'Open Sans', sans-serif;
     font-size: large;
     color:white;
@@ -61,22 +63,16 @@ video#bgvid {
 
 #submit {
     position:fixed;
-    top: 77%;
-    left: 48%;
-    width:7em;
-    height:2.5em;
-    margin-top: -9em;
-    margin-left: -15em;
+    top: 75%;
+    left: 138%;
+    transform: translate(-138%, -75%);
 }
 
 #reset {
     position:fixed;
-    top: 77%;
-    left: 56%;
-    width:7em;
-    height:2.5em;
-    margin-top: -9em;
-    margin-left: -15em;
+    top: 105%;
+    left: 128%;
+    transform: translate(-128%, -105%);
 }
 
 input[type="text"] {
