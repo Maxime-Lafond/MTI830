@@ -64,15 +64,17 @@ video#bgvid {
 #submit {
     position:fixed;
     top: 75%;
-    left: 138%;
-    transform: translate(-138%, -75%);
+    left: 150%;
+    width: 130px;
+    transform: translate(-150%, -75%);
 }
 
 #reset {
     position:fixed;
     top: 105%;
-    left: 128%;
-    transform: translate(-128%, -105%);
+    left: 150%;
+    width: 130px;
+    transform: translate(-150%, -105%);
 }
 
 input[type="text"] {
