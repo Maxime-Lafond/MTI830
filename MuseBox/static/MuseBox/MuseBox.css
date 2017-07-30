@@ -13,18 +13,27 @@ video#bgvid {
 
 #title {
     position:fixed;
-    top: 10%;
+    top: 7%;
     left: 50%;
-    transform: translate(-50%, -10%);
+    transform: translate(-50%, -7%);
     font-family: 'Lobster';
     color: white;
 }
 
 #info {
     position:fixed;
-    top: 20%;
+    top: 25%;
     left: 50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, -25%);
+	font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+#infoResult {
+    position:fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -25%);
 	font-family: 'Open Sans', sans-serif;
     color: white;
 }
@@ -43,11 +52,11 @@ video#bgvid {
 
 #divForm {
     position:fixed;
-    top: 53%;
+    top: 60%;
     left: 50%;
-    width:35em;
+    width:38em;
     height:19em;
-    transform: translate(-50%, -53%);
+    transform: translate(-50%, -60%);
     background-color:rgba(0,0,0,0.5);
 }
 
@@ -63,18 +72,18 @@ video#bgvid {
 
 #submit {
     position:fixed;
-    top: 75%;
-    left: 150%;
+    top: 70%;
+    left: 140%;
     width: 130px;
-    transform: translate(-150%, -75%);
+    transform: translate(-140%, -70%);
 }
 
 #reset {
     position:fixed;
-    top: 105%;
-    left: 150%;
+    top: 95%;
+    left: 140%;
     width: 130px;
-    transform: translate(-150%, -105%);
+    transform: translate(-140%, -95%);
 }
 
 input[type="text"] {
