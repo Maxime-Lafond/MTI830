@@ -19,11 +19,11 @@
         MuseBox - Music Search Engine
     </h1>
     <h3 id="infoResult">
-        Congrats ! Here is the result :
+        Congrats ! We have found 3 songs for each songs in your selection you'll surely like. You have also the artist to facilitate your research :
 
     </h3>
-    <div class="form-group" id="divForm">
-        <h3 id="result">
+    <div class="form-group" id="divFormResult">
+        <h3 id="formResult">
             {% for row in result %}
                 Song {{ forloop.counter }} result :
                 <ul>
@@ -32,7 +32,6 @@
                 {% endfor %}
                 </ul>
             {% endfor %}
-            </p>
         </h3>
     </div>
   </body>

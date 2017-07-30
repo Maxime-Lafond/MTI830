@@ -50,6 +50,19 @@ video#bgvid {
     color: white;
 }
 
+#divFormResult {
+    position:fixed;
+    top: 75%;
+    left: 50%;
+    width:50em;
+    height:27em;
+    transform: translate(-50%, -75%);
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    background-color:rgba(0,0,0,0.5);
+}
+
+
 #divForm {
     position:fixed;
     top: 60%;
@@ -67,6 +80,16 @@ video#bgvid {
     transform: translate(-35%, -55%);
     font-family: 'Open Sans', sans-serif;
     font-size: large;
+    color:white;
+}
+
+#formResult {
+    position:fixed;
+    top: 10%;
+    left: 10%;
+    transform: translate(-10%, -10%);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 150%;
     color:white;
 }
 
