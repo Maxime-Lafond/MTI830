@@ -127,13 +127,43 @@ class SongManager(models.Manager):
                     break
                 count += 1
 
+
+    @staticmethod
+    def filteringByOthersFeatures(lists, user_songs):
+        for idx, suggestion_list in enumerate(lists):
+            temp=[]
+            # Find a song with the same artist
+            for song, dist in suggestion_list:
+                if song.artistName == user_songs[idx].artistName:
+                    temp.append(song)
+                    break
+            # Find songs with similar popularity (+- 0.2) in case the user song have not the default value -1
+            if user_songs[idx].popularity != -1:
+                for song, dist in suggestion_list:
+                    if -0.2 >= (song.popularity - user_songs[idx].popularity) <= 0.2 and song not in temp:
+                        temp.append(song)
+            # Find song with similar year (+- 4) in case the user song have not the default value 0
+            if user_songs[idx].year != 0:
+                for song, dist in suggestion_list:
+                    if -4 >= (song.year - user_songs[idx].year) <= 4 and song not in temp:
+                        temp.append(song)
+            # Fill the list with smaller distance if the list is still under 3
+            if len(temp) < 3:
+                for song, dist in suggestion_list:
+                    if song not in temp:
+                        temp.append(song)
+                    if len(temp) >= 3:
+                        break
+            lists[idx] = temp[:3]
+
+
     @staticmethod
     def createFinalList(lists):
         result = []
 
         for my_list in lists:
             temp_list = []
-            for song, dist in my_list:
+            for song in my_list:
                 temp_list.append(song.title + " - " + song.artistName)
             result.append(temp_list[:3])
 
@@ -144,10 +174,12 @@ class SongManager(models.Manager):
         songs_set = list(Song.objects.all())
 
         # Euclidian algo on gender attributes. list for each user song of type dictionary (song:distance), ordered lower to higher.
-        temp = SongManager.euclideanCalculationOnGender(user_songs,songs_set)
+        result = SongManager.euclideanCalculationOnGender(user_songs,songs_set)
 
-        # Take 50 first or all with distance 0.00
-        SongManager.filteringListsByDistance(temp)
+        # Take 50 firsts or all with distance 0.00
+        SongManager.filteringListsByDistance(result)
 
+        # Strip to 3 choices for each song using other features
+        SongManager.filteringByOthersFeatures(result,user_songs)
 
-        return SongManager.createFinalList(temp)
+        return SongManager.createFinalList(result)
