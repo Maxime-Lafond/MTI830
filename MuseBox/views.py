@@ -15,6 +15,7 @@ def index(request):
             result = SongManager.findBestMatch([song1, song2, song3])
             return render(request, 'result.html', {'result': result})
     else:
-        # SongManager.initDB() # Mettre en commentaire après le premier init
+        if 2400 > Song.objects.count() > 2500 :
+            SongManager.initDB()
         form = UserSongs()
         return render(request, 'index.html', {'form': form})
