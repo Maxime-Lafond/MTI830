@@ -35,8 +35,11 @@ class Song(models.Model):
 
     @classmethod
     def create(cls, title):
-        return Song.objects.get(title=title)
-
+        try:
+            return Song.objects.get(title=title)
+        except:
+            print("Error creating object for this title : ",title)
+            return False
 
 class SongManager(models.Manager):
 
